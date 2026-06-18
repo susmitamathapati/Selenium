@@ -27,9 +27,7 @@ pipeline {
     
 
     post {
-        always {
-            junit '**/target/surefire-reports/*.xml'
-        }
+        
 
         success {
             echo 'Selenium tests executed successfully!'
