@@ -1,36 +1,29 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven'
+        jdk 'JDK'
+    }
+
     stages {
 
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
                 git branch: 'master',
-                url: 'https://github.com/susmitamathapati/Selenium.git'
+                    url: 'https://github.com/susmitamathapati/Selenium.git'
             }
         }
 
-        stage('Clean Project') {
+        stage('Build') {
             steps {
-                sh 'mvn clean'
+                sh 'mvn clean compile'
             }
         }
 
-        stage('Compile') {
-            steps {
-                sh 'mvn compile'
-            }
-        }
-
-        stage('Run Selenium Tests') {
+        stage('Test') {
             steps {
                 sh 'mvn test'
-            }
-        }
-
-        stage('Package') {
-            steps {
-                sh 'mvn package'
             }
         }
     }
@@ -41,11 +34,11 @@ pipeline {
         }
 
         success {
-            echo 'Build and Selenium Tests Passed Successfully!'
+            echo 'Selenium tests executed successfully!'
         }
 
         failure {
-            echo 'Build or Selenium Tests Failed!'
+            echo 'Selenium tests failed!'
         }
     }
 }
