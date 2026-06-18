@@ -26,7 +26,7 @@ pipeline {
             steps {
                 // Start the JAR application
                 sh 'java -jar target/mavenSrcDest-1.0-SNAPSHOT.jar'
-'
+
             }
         }
     }
